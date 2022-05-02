@@ -1,0 +1,31 @@
+networks:
+    app-tier:
+      driver: bridge
+
+services:
+
+  cassandra:
+    image: docker.io/bitnami/cassandra:4.0
+    networks:
+      - app-tier
+    ports:
+      - 7000:7000
+      - 9042:9042
+    volumes:
+      - ./cassandra-persistence:/bitnami
+    environment:
+      - CASSANDRA_SEEDS=cassandra
+      - CASSANDRA_PASSWORD_SEEDER=yes
+      - CASSANDRA_PASSWORD=cassandra
+        
+  jupyter-pyspark:
+    build: ./assignment #spark 3.2.1
+    networks:
+      - app-tier
+    ports:
+      - 4040:4040
+      - 8888:8888
+    volumes:
+      - .:/home/jovyan/work
+
+      #####TODO: Add init script for cassandra db
