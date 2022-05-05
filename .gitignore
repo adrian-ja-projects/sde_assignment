@@ -129,7 +129,7 @@ ui-tests/playwright-report
 
 #Added for assignment project
 #cassandra volumnes 
-./cassandra-persistence
+./cassandra
 
 #datalake path
 ./assignment/data_lake
