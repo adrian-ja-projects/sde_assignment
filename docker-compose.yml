@@ -23,7 +23,6 @@ services:
     networks:
       - app-tier
     ports:
-      - 4050:4050
       - 4040:4040
       - 8888:8888
     volumes:
