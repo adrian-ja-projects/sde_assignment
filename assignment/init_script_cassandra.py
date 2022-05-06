@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS session_events.api_start_session_by_hour (
   ts           timestamp,
   event_date   date,
   cs_insert_ts timestamp,
-  PRIMARY KEY (session_id, ts, event_date) )
+  PRIMARY KEY (session_id, ts, country) )
   WITH CLUSTERING ORDER BY (ts DESC);
 """)
 

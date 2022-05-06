@@ -1,7 +1,7 @@
 import os
 import pathlib
 
-from cassandra.cluster import Cluster
+from cassandra.cluster import Cluster, ExecutionProfile
 from cassandra.auth import PlainTextAuthProvider
 from cassandra.cqlengine.connection import register_connection, set_default_connection
 
@@ -18,7 +18,8 @@ CASSANDRA_DB_KEYSPACE = settings.cass_db_keyspace
 
 def get_cluster_conn():
     auth_provider = PlainTextAuthProvider(username=CASSANDRA_DB_DB_USERNAME, password=CASSANDRA_DB_PASSWORD)
-    cluster = Cluster([CASSANDRA_DB_CLIENT_ID], port=CASSANDRA_DB_PORT, auth_provider=auth_provider)
+    profile_long = ExecutionProfile(request_timeout=30)
+    cluster = Cluster([CASSANDRA_DB_CLIENT_ID], port=CASSANDRA_DB_PORT, auth_provider=auth_provider, execution_profiles={'long': profile_long})
     return cluster
 
 def get_session():
