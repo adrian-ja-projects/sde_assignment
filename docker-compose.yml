@@ -26,6 +26,14 @@ services:
       - 4040:4040
       - 8888:8888
     volumes:
-      - .:/home/jovyan/work
+      - ./assignment:/home/jovyan/work
 
-      #####TODO: Add init script for cassandra db
+  fast-api:
+    build: ./fastapi-app
+    networks:
+      - app-tier
+    ports:
+      - 8000:8000
+      - 8080:8080
+    volumes:
+      - ./fastapi-app:/app
