@@ -38,7 +38,8 @@ CREATE TABLE IF NOT EXISTS casscatalog.session_events.api_start_session_by_hour 
   ts           TIMESTAMP,
   event_date   DATE,
   cs_insert_ts TIMESTAMP)
-  PARTITIONED  BY (event_date, session_id);
+  USING cassandra PARTITIONED BY (session_id)
+  TBLPROPERTIES  (clustering_key='event_date.asc');
 """)
 #   CLUSTERED BY (event_date)
 #    SORTED BY (ts);
@@ -55,7 +56,8 @@ CREATE TABLE IF NOT EXISTS casscatalog.session_events.api_completed_sessions (
   ts           TIMESTAMP,
   event_date   DATE,
   cs_insert_ts TIMESTAMP)
-  PARTITIONED  BY (event_date, session_id);
+  USING cassandra PARTITIONED BY (player_id, session_id)
+  TBLPROPERTIES (clustering_key='event_date.asc');
 """)
 #PARTITIONED  BY (event_date);
 print("INFO: table ession_events.api_start_session_by_hour re-created in cassandra db")
