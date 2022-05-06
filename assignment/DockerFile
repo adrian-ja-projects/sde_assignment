@@ -13,6 +13,11 @@ RUN pip install --quiet --no-cache-dir pytest==${PYTEST_VERSION} && \
      fix-permissions "${HOME}" && \
      fix-permissions "${CONDA_DIR}"
 
+ARG CASSANDRA_DRIVE_VERSION="3.25.0" 
+RUN pip install --quiet --no-cache-dir cassandra-driver==${CASSANDRA_DRIVE_VERSION} && \
+     fix-permissions "${HOME}" && \
+     fix-permissions "${CONDA_DIR}"
+
 USER root
 
 #set spark-cassandra connector package

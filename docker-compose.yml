@@ -6,6 +6,7 @@ services:
 
   cassandra:
     image: docker.io/bitnami/cassandra:4.0
+    container_name: sde_cassandra
     networks:
       - app-tier
     ports:
@@ -20,6 +21,7 @@ services:
         
   jupyter-pyspark:
     build: ./assignment #spark 3.2.1
+    container_name: sde_jupyter_spark
     networks:
       - app-tier
     ports:
@@ -30,6 +32,7 @@ services:
 
   fast-api:
     build: ./fastapi-app
+    container_name: sde_fast_api
     networks:
       - app-tier
     ports:

@@ -128,11 +128,15 @@ ui-tests/playwright-report
 .vscode
 
 #Added for assignment project
+
 #cassandra volumnes 
-./cassandra
+cassandra/*
 
-#datalake path
-./assignment/data_lake
+#spar-warehouse  
+assignment/spark-warehouse
 
-#spar-warehouse
-./spark-warehouse
+#all from assignment data
+assignment/data_lake/raw/assignment_data/*
+
+#all from uc_assignment
+assignment/data_lake/use_case/uc_assignment/*
