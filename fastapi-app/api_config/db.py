@@ -24,10 +24,10 @@ def get_cluster_conn():
     cluster = Cluster([CASSANDRA_DB_CLIENT_ID], port=CASSANDRA_DB_PORT, auth_provider=auth_provider, execution_profiles={'long': profile_long})
     return cluster
     
-@retry(stop=stop_after_attempt(3), wait=wait_fixed(30), retry=retry_if_exception_type(NoHostAvailable))
+@retry(stop=stop_after_attempt(3), wait=wait_fixed(60), retry=retry_if_exception_type(NoHostAvailable))
 def get_session():
     cluster = get_cluster_conn()
-    session = cluster.connect(CASSANDRA_DB_KEYSPACE)
+    session = cluster.connect()
     register_connection(str(session), session=session)
     set_default_connection(str(session))
     return session
