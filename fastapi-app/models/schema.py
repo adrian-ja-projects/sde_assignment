@@ -1,8 +1,7 @@
 from datetime import datetime
 from typing import List, Optional
-from pydantic import BaseModel, root_validator
+from pydantic import BaseModel
 
-#StartedSessions, CompletedSessionByUser
 class StartedSessionsSchema(BaseModel):
     player_id: str
     session_id: str

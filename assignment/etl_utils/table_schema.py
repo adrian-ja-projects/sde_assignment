@@ -1,8 +1,5 @@
 #Author: Adrian Jimenez 2022-05
-#develop for unity assignment
-
 import json
-
 from pathlib import Path
 from pyspark.sql.types import StructType, StructField
 

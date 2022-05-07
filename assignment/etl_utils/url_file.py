@@ -1,5 +1,4 @@
 #class UrlFile project Unity assignment
-#version 0.0.0
 #Author: Adrian Jimenez 2022-05
 
 import requests
