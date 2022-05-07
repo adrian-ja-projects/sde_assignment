@@ -1,11 +1,9 @@
-import os
-import pathlib
-
+#Author: Adrian J 2022-05
 from cassandra.cluster import Cluster, ExecutionProfile
 from cassandra.auth import PlainTextAuthProvider
 from cassandra.cqlengine.connection import register_connection, set_default_connection
 
-from . import config
+from . import config #TO-DO structure project better
 
 settings = config.get_db_setting()
 

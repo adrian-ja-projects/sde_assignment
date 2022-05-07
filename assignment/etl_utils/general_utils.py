@@ -1,5 +1,6 @@
 #General utils for the project assignment for unity
 #Author: Adrian Jimenez 2022-05
+#TO-DO: Execption management from delta tables
 from delta import *
 from pyspark.sql import SparkSession 
 from pyspark.sql import DataFrame as SparkDataFrame

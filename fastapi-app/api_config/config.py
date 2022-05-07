@@ -1,7 +1,6 @@
-import os
+#Author: Adrian J 2022-05
 from functools import lru_cache
-
-from pydantic import BaseSettings, Field
+from pydantic import BaseSettings
 
 class CassandraDbSettings(BaseSettings):
     cass_db_client_id: str

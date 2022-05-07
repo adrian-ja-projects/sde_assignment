@@ -1,15 +1,11 @@
-from os import sync
-from cassandra.cqlengine.management import sync_table
+
+#TO-DO: implement security such as apiKey for authorization
+#TO-DO: implement RateLimitExceeded to limit request hits per window
 from fastapi import FastAPI, Path, status
 from fastapi.responses import JSONResponse
-from fastapi.encoders import jsonable_encoder
-#from starlette import status
-# from starlette.responses import RedirectResponse, JSONResponse
 from typing import List
-import json
 
 from api_config import config, db
-from models.session_models import StartedSessions, CompletedSessionByUser
 from models.schema import StartedReturnSchema, CompletedReturnSchema
 from utils.time_utils import time_delta
 
