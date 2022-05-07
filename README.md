@@ -30,5 +30,6 @@ IMAGE PLACEHOLDER
 COMMAND PLACEHOLDER
 4. Once all the container up and healthy. Open Jupyter lab using the url with the token copied from the terminal. Open the notebook work/assingment/main.ipynb and run all the cells to run all pipelines end to end. 
 
-## pipeline runs 
+## Pipeline Runs
+
 
