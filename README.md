@@ -86,7 +86,7 @@ Apart from the improvements with the implementation of production like TO-BE arc
 - The current API app does not support paging large queries. 
 - Cassandra-driver for python contains a method to handle queries over 5000 rows.
 6. Improve API latency
-- Tunning Cassandra table definition
+- Tunning Cassandra table definition: 1. add support for UUID data type in the transformation 2. Test performance on a different table partition and bucketing 3. Schedule scripts to archive data older than one year.
 - Reduce the response parsing time by using Cassandra-driver query factories to return a more performant response.
 
 
