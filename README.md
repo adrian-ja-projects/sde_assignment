@@ -30,6 +30,11 @@ IMAGE PLACEHOLDER
 COMMAND PLACEHOLDER
 4. Once all the container up and healthy. Open Jupyter lab using the url with the token copied from the terminal. Open the notebook work/assingment/main.ipynb and run all the cells to run all pipelines end to end. 
 
+*WARNINGS!*
+- The sde_cassandra container will persist a db instance in the root folder of the project
+- The ETL pipeline jobs will persist data within the folder ./assignment/data_lake 
+
+
 ## ETL Pipeline jobs
 
 
