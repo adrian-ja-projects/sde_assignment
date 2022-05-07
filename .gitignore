@@ -140,3 +140,7 @@ assignment/data_lake/raw/assignment_data/*
 
 #all from uc_assignment
 assignment/data_lake/use_case/uc_assignment/*
+
+#all from landingzone
+assignment/data_lake/landingzone/*
+
