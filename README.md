@@ -41,22 +41,27 @@ COMMAND PLACEHOLDER
 ## ETL Pipeline jobs
  **NOTE**:This project was developed as a Proof of Concept, hence the ETL jobs are a combination of .py and .ipynb files, the design decision was taken to enable faster debugging. A production-ready project would have been developed as per the orchestrator in mind, suchs a Airflow or Azure Data Factory and in turn adopting the correct practices such as designing the jobs in DAGs or Activities.
 ### p01_re_create_tables.ipynb
-1. Pipeline create keyspace and required tables in Cassandra this by running internally the script init_scripts_cassandra.py
-2. Create the delta tables required in the data lake.
+1. Pipeline create keyspace  
+2. Creates required tables in Cassandra this by running internally the script init_scripts_cassandra.py
+3. Create the delta tables required in the data lake.
 
 ### p02_start_w_stream_to_delta.ipynb
-1. Defines and start a read and write stream in a foreacbatch mode which listens to the delta table r_event_sessions in raw zone
-2. UPSERT the micro-batch data into uc_delta_event_sessions uc_case zone
+1. Defines and start a readstream from r_event_session in raw zone
+2. Defines and start a writestream in a foreacbatch 
+3. UPSERT the micro-batch data into uc_delta_event_sessions uc_case zone
 
 ### p03_start_w_stream_cass.ipynb
-1. Defines and start a read and write stream in a foreachbatch mode which listens to the delta table r_event_sessions in raw zone 
-2. Append the micro batches data into Cassandra instance tables.
+1. Defines and start a readstream from r_event_session in raw zone
+2. Define and start a writestream in a foreachbatch
+3. Append the micro batches data into Cassandra instance tables.
 
 ### p1_url_to_lz.ipynb
-1. Download and load the assingment zipped data and save in landingzone
+1. Download and load the assingment zipped data and 
+2. Save it in landingzone
 
 ### p2_lz_to_raw
-1. Read the assignment zipped data from landingzone and write it into a delta table r_session_events. This is set up such that it **mimics a stream in micro-batches** per each data date. This is to bring the solution design closer to a real-life scenario.
+1. Read the assignment zipped data from landingzone  
+2. Write it into a delta table r_session_events. This is set up such that it **mimics a stream in micro-batches** per each data date. This is to bring the solution design closer to a real-life scenario.
 
 ## Pipeline Architecture
 Platform current and desired solution architecture.
@@ -66,7 +71,16 @@ Platform current and desired solution architecture.
 ### TO-BE
 
 ## Improvements ideas and known issues
-
+1. Set ETL_DEBUG as a environment variable to be managed in the docker-compose
+2. Improve the writting performance of the UPSERT into uc_delta_session_events by:
+- Specifying the partition in the merge statemnt. Delta table uc_delta_session_events and its writestream both have a new attribute column EVENT_DATE, if this is specified as new_record_microbatch.EVENT_DATE =< delta_table.EVENT_DATE, spark would only need to look up session_id on the last couple of partitions.
+- Reduce the microbatch records. Currently the microbatch from assingment data is loop in event date to mimic a microbatch source. However, this microbatches contain a high-number of records that makes the append or upsert foreachbatch not performant enough. As mentioend above, this was to mimic a real-life scenario and architecture. 
+3. Increase the scope of the pytest.
+- Currently the pytest only covers spark session creation.
+- Extend to fastAPI app
+- Extend to Cassandra connection
+4. Use of keys and password to access the FastAPI
+5. 
 
 
 
