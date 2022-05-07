@@ -55,6 +55,7 @@ def upsert_into_table(spark: SparkSession, inputDF: SparkDataFrame, table_name: 
         ).execute()
         #provide number of rows appended or 0
         metadata = (existingTable.history(1))
+        print(f'INFO: Upsert for table {table_name} completed')
         print(f'INFO: Upsert Mode -> {upsert_mode}')
         print(f'INFO: metadata = {metadata.collect()[0]}')
     elif upsert_mode == 'update':
