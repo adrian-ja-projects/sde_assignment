@@ -32,7 +32,7 @@ async def get_completed_sessions(player_id: str = Path(None, description="Last 2
     session_id,  
     country,  
     ts 
-    FROM api_completed_sessions 
+    FROM session_events.api_completed_sessions 
     WHERE player_id=? 
     ORDER BY ts DESC LIMIT 20""")
     rows = session.execute(prepared_statement, [player_id])
@@ -51,7 +51,7 @@ country: str = Path(None, description="Country from where the sessions occurred"
     session_id,
     country,  
     ts 
-    FROM api_start_session_by_hour 
+    FROM session_events.api_start_session_by_hour 
     WHERE ts>=? AND country=? ALLOW FILTERING""")
     rows = session.execute(prepared_statement, (time_delta(hours), country))
     data = {'items': []}
