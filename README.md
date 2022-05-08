@@ -112,8 +112,19 @@ Has two parameters ```country``` accepts strings and ```hours``` accepts integer
 ***NOTE*** for demo purposes current time is fixed to 2016-11-06. 
 
 ## Insights
-Answer to all the question requested in the assignment are in this notebook in HTML format: 
+The table used for the analysis is the table uc_delta_session_events is ACID transactions enabled table. This means each row is a unique session_id.
 
+Table description:\ -country: country\ -player_id: unique player uuid\ -session_id: unique session uuid\ -start_ts: start session timestamp\ -end_ts: end session timestamp\ -session_status: 0-> not completed, 1-> completed\ -DL_INSERT_TS: Data Lake Insert row ts\ -DL_UPDATE_TS: Data Lake update row ts
+
+- How many sessions are in the dataset?
+
+- How many sessions are completed per country? Print the top 10 results sorted by count(DESC) and country(ASC).
+
+- How many sessions are completed per player? Print the top 10 results sorted by count(DESC) and player_id(ASC).
+
+- What is the country with the most number of sessions started in 2016? 
+
+- Plot the player sessions completed per country. Bar plot the top 10 results sorted by count(DESC) and country(ASC). 
 
 ## Pipeline Architecture
 Current and desired solution architecture.
