@@ -15,23 +15,28 @@ SDE Assignment is a docker-compose ready-to-run project. The project consists of
 - Docker desktop
 
 ## Quick Start
-**NOTE**: The ETL jobs are set up in debug mode which processes only a slice of the assignment data. To run this in full mode change the variable in work/assignment/p2_lz_to_raw.ipynb located in the first cell as image below:
+**NOTE**: The ETL jobs are set up in debug mode which processes only a slice of the assignment data. To run this in full mode change the variable in work/assignment/p2_lz_to_raw.ipynb located in the first cell to ```False```. Refer to image below:
+![debug_true](https://user-images.githubusercontent.com/54493284/167284020-ab97afbd-a0ab-4c8d-856e-6c78709466aa.PNG)
 
+**Steps**
+1. Clone repo
 
-IMAGE_PLACEHOLDER
-
-1. Clone git repo
 2. Run docker-compose with the command below in the root folder
 ```bash
 docker-compose up
 ```
 3. Await for the download and creation of the three containers:
 - sde_jupyter_spark: make sure to copy the link with the URL token to access Jupyter lab (as image below). You might need to change the root of the URL to localhost. Example: "http://127.0.0.1:8888/lab?token=xxxxxxxxxxxxxxxxxxx" -> "http://localhost:8888/lab?token=xxxxxxxxxxxxxxxxxxx"
-IMAGE PLACEHOLDER
+![jupyter_token](https://user-images.githubusercontent.com/54493284/167284029-b480f93b-e122-407f-946f-764b72f5d13d.PNG)
 - sde_cassandra: await for the complete setup and start of Cassandra. The output of the terminal looks like this:
-IMAGE PLACEHOLDER
-- sde_fast_api: await until the message as below. As the API app requires Cassandra to start it retries three times every 60 seconds. If Cassandra is not ready within three minutes, the app will be an exit with code 0 and it will be required to run the command below
-COMMAND PLACEHOLDER
+![cassandra_ready](https://user-images.githubusercontent.com/54493284/167284037-12b871b3-82b0-49c5-b502-5b6ac3ac112a.PNG)
+- sde_fast_api: await until the message as below.
+![sde_fastapi_started](https://user-images.githubusercontent.com/54493284/167284574-f7ecacaa-cdce-4ee1-abb7-7796b4d05a63.PNG) 
+
+The API app requires Cassandra to be up a running for a successful connection, if host is unavailable it retries three times every 60 seconds. If Cassandra is not ready within three minutes, the app will be an exit with code 0 and it will be required to run the command below
+```bash
+docker exec -it sde_fast_api uvicorn main:app --host 0.0.0.0 --reload
+```
 4. Once all the containers are up and healthy. Open Jupyter lab using the URL with the token copied from the terminal. Open the notebook work/assignment/main.ipynb and run all the cells to run all pipelines end to end. 
 
 **WARNINGS!**
@@ -107,13 +112,25 @@ Has two parameters ```country``` accepts strings and ```hours``` accepts integer
 Current and desired solution architecture.
 
 ### AS-IS
-
+![architecture_asis](https://user-images.githubusercontent.com/54493284/167284046-0f34dd25-e29a-46a2-9244-64c69159d95a.PNG)
 ### TO-BE
+![architecture_tobe](https://user-images.githubusercontent.com/54493284/167284043-4a19ffe7-6388-4fd3-9d5f-c47361a02444.PNG)
+
+**Changes**
+1. Implementation of an orchestration/platform/integration tool as the main tool to manage the jobs. For example either of the below:
+- Airflow: to orchestrate and trigger the containerized jobs and monitor progress
+- Azure Data Factory: to integrate and orchestrate jobs
+- Databricks + (Airflow, Azure Data Factory): launch cluster images with dependencies for jobs
+2. Lakehouse architecture powered by spark and Delta lake for acid tables. 
+3. Data quality engine for batch/scheduled jobs. For example Amazon Dequee
+4. Metadata DB: Capture logs and data quality states for downstream consumers. 
 
 ## Improvements ideas and known issues
 Apart from the improvements with the implementation of production like TO-BE architecture. Below are some improvements to the AS-IS and overall application.
 
-1. Set ETL_DEBUG as an environment variable to be managed in the docker-compose. This is to replace the debug mode mentioned above
+
+
+- [ ] Set ETL_DEBUG as an environment variable to be managed in the docker-compose. This is to replace the debug mode mentioned above
 2. Improve the writing performance of the UPSERT into uc_delta_session_events by:
 - Specify the partition in the merge statement. Delta table uc_delta_session_events and its writestream both have a new attribute column EVENT_DATE, if this is specified as new_record_microbatch.EVENT_DATE =< delta_table.EVENT_DATE, spark would only need to look up session_id on the last couple of partitions.
 - Reduce the microbatch records. Currently, the micro-batch from assignment data is a loop in event date to mimic a micro-batch source. However, these microbatches contain a high number of records that makes the append or upsert foreachbatch not performant enough. As mentioned above, this was to mimic a real-life scenario and architecture. 
