@@ -128,23 +128,13 @@ Current and desired solution architecture.
 ## Improvements ideas and known issues
 Apart from the improvements with the implementation of production like TO-BE architecture. Below are some improvements to the AS-IS and overall application.
 
+- [ ] debug mode as environment variable specify in docker build -> https://github.com/adrian-ja-projects/sde_assignment/issues/36
+- [ ] Improve UPSERT in writestream into uc_delta_session and r_session_events table. More information how in issue -> https://github.com/adrian-ja-projects/sde_assignment/issues/37
+- [ ] Increase the scope of pytest to test cassandra connection, API health etc. -> https://github.com/adrian-ja-projects/sde_assignment/issues/38
+- [ ] Implementation of keys and passwords to use FastAPI -> https://github.com/adrian-ja-projects/sde_assignment/issues/39
+- [ ] Enable Paging Large Queries for API -> https://github.com/adrian-ja-projects/sde_assignment/issues/40
+- [ ] Improve API latency -> https://github.com/adrian-ja-projects/sde_assignment/issues/41
 
-
-- [ ] Set ETL_DEBUG as an environment variable to be managed in the docker-compose. This is to replace the debug mode mentioned above
-2. Improve the writing performance of the UPSERT into uc_delta_session_events by:
-- Specify the partition in the merge statement. Delta table uc_delta_session_events and its writestream both have a new attribute column EVENT_DATE, if this is specified as new_record_microbatch.EVENT_DATE =< delta_table.EVENT_DATE, spark would only need to look up session_id on the last couple of partitions.
-- Reduce the microbatch records. Currently, the micro-batch from assignment data is a loop in event date to mimic a micro-batch source. However, these microbatches contain a high number of records that makes the append or upsert foreachbatch not performant enough. As mentioned above, this was to mimic a real-life scenario and architecture. 
-3. Increase the scope of the pytest.
-- Currently, the pytest only covers spark session creation.
-- Extend to fastAPI app
-- Extend to Cassandra connection
-4. Use of keys and password to access the FastAPI
-5. Enable Paging Large Queries:
-- The current API app does not support paging large queries. 
-- Cassandra-driver for python contains a method to handle queries over 5000 rows.
-6. Improve API latency
-- Tunning Cassandra table definition: 1. add support for UUID data type in the transformation 2. Test performance on a different table partition and bucketing 3. Schedule scripts to archive data older than one year.
-- Reduce the response parsing time by using Cassandra-driver query factories to return a more performant response.
 
 
 
