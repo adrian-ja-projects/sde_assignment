@@ -17,6 +17,7 @@ SDE Assignment is a docker-compose ready-to-run project. The project consists of
 ## Quick Start
 **NOTE**: The ETL jobs are set up in debug mode which processes only a slice of the assignment data. To run this in full mode change the variable in work/assignment/p2_lz_to_raw.ipynb located in the first cell as image below:
 
+
 IMAGE_PLACEHOLDER
 
 1. Clone git repo
