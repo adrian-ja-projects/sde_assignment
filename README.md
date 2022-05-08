@@ -63,8 +63,47 @@ COMMAND PLACEHOLDER
 1. Read the assignment zipped data from landingzone  
 2. Write it into a delta table r_session_events. This is set up such that it **mimics a stream in micro-batches** per each data date. This is to bring the solution design closer to a real-life scenario.
 
+## API
+Once the above pipelines are complete, you should be able to access the API UI at the following URL: http://localhost:8000/docs 
+
+### /health
+Responds 'healthy' if the API app is running 
+
+### /models/completed-sessions/{player_id}
+Has a parameter ```player_id``` and accepts strings you will see a JSON respond like
+```
+{
+  "items": [
+    {
+      "player_id": "string",
+      "session_id": "string",
+      "country": "string",
+      "ts": "2022-05-08T03:18:25.196Z"
+    }
+  ],
+  "count": 0
+}
+```
+### /models/started_sessions/{country}/{hours}
+Has two parameters ```country``` accepts strings and ```hours``` accepts integers which is the number of x hours from the last started session. Max accepted hours is 24. you will see a JSON response like
+```
+{
+  "items": [
+    {
+      "player_id": "string",
+      "session_id": "string",
+      "country": "string",
+      "ts": "2022-05-08T03:29:22.793Z"
+    }
+  ],
+  "count": 0
+}
+```
+***NOTE*** for demo purposes current time is fixed to 2016-11-06. 
+
+
 ## Pipeline Architecture
-Platform current and desired solution architecture.
+Current and desired solution architecture.
 
 ### AS-IS
 
