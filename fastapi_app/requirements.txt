@@ -1,9 +1,0 @@
-cassandra-driver==3.25.0
-fastapi==0.77.1
-pydantic==1.9.0
-pytest==7.1.2
-python-dotenv==0.20.0
-requests==2.27.1
-starlette==0.19.1
-tenacity==8.0.1
-uvicorn==0.17.6
