@@ -152,8 +152,8 @@ Current and desired solution architecture.
 Apart from the improvements with the implementation of production like TO-BE architecture. Below are some improvements to the AS-IS and overall application.
 
 - [ ] debug mode as environment variable specify in docker build -> https://github.com/adrian-ja-projects/sde_assignment/issues/36
-- [ ] Improve UPSERT in writestream into uc_delta_session and r_session_events table. More information on how in issue -> https://github.com/adrian-ja-projects/sde_assignment/issues/37
-- [ ] Increase the scope of pytest to test cassandra connection, API health etc. -> https://github.com/adrian-ja-projects/sde_assignment/issues/38
+- [x] Improve UPSERT in writestream into uc_delta_session and r_session_events table. More information on how in issue -> https://github.com/adrian-ja-projects/sde_assignment/issues/37
+- [x] Increase the scope of pytest to test cassandra connection, API health etc. -> https://github.com/adrian-ja-projects/sde_assignment/issues/38
 - [ ] Implementation of keys and passwords to use FastAPI -> https://github.com/adrian-ja-projects/sde_assignment/issues/39
 - [ ] Enable Paging Large Queries for API. More information on how in issue -> https://github.com/adrian-ja-projects/sde_assignment/issues/40
 - [ ] Improve API latency. More information on how in issue -> https://github.com/adrian-ja-projects/sde_assignment/issues/41
