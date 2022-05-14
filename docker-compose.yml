@@ -40,4 +40,4 @@ services:
       - 8080:8080
     volumes:
        - ./fastapi_app:/fastapi_app
-      #- ./fastapi_app:/app
+      
