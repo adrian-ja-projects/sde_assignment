@@ -31,7 +31,7 @@ services:
       - ./assignment:/home/jovyan/work
 
   fast-api:
-    build: ./fastapi-app
+    build: ./fastapi_app
     container_name: sde_fast_api
     networks:
       - app-tier
