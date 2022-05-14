@@ -1,6 +1,6 @@
 FROM python:3.9
 
-WORKDIR /app
+WORKDIR /fastapi_app
 
 COPY requirements.txt .
 
