@@ -4,7 +4,7 @@ from cassandra.auth import PlainTextAuthProvider
 from cassandra.cqlengine.connection import register_connection, set_default_connection
 from tenacity import retry, stop_after_attempt, retry_if_exception_type, wait_fixed
 
-from . import config #TO-DO structure project better
+from api_config import config #TO-DO structure project better
 
 settings = config.get_db_setting()
 
