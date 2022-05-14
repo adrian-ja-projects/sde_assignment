@@ -39,4 +39,5 @@ services:
       - 8000:8000 #default swagger ui api port
       - 8080:8080
     volumes:
-      - ./fastapi-app:/app
+       - ./fastapi_app:/fastapi_app
+      
