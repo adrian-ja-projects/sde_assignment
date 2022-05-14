@@ -9,4 +9,3 @@ def test_spark_running(spark_s):
     exclamation = df.select("Exclamation").collect()[0][0]
     hello_world = f"{hello} {world} {exclamation}"
     assert hello_world == "Hello World !"
-
