@@ -42,6 +42,7 @@ async def get_completed_sessions(player_id: str = Path(None, description="Last 2
     data['count'] = len(data['items'])
     return data
 
+
 @app.get("/models/started_sessions/{country}/{hours}", response_model=CompletedReturnSchema)
 async def get_started_sessions(hours: int = Path(None, description="Last number of hours to fetch started session MAX 24 hrs from current time", le=24), 
 country: str = Path(None, description="Country from where the sessions occurred")):
