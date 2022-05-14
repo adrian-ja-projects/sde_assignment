@@ -31,7 +31,7 @@ services:
       - ./assignment:/home/jovyan/work
 
   fast-api:
-    build: ./fastapi_app
+    build: ./fastapi-app
     container_name: sde_fast_api
     networks:
       - app-tier
@@ -39,5 +39,4 @@ services:
       - 8000:8000 #default swagger ui api port
       - 8080:8080
     volumes:
-       - ./fastapi_app:/fastapi_app
-      #- ./fastapi_app:/app
+      - ./fastapi-app:/app
