@@ -10,5 +10,5 @@ def time_delta(hours: int):
     """
     #ct = datetime.now()
     ct = datetime.datetime(2016, 11, 7)
-    delta_time = ct - timedelta(hours=10)
+    delta_time = ct - timedelta(hours=hours)
     return delta_time
